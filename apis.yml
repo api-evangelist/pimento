@@ -1,7 +1,25 @@
 aid: pimento
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/pimento.png
 name: Pimento
-description: 'Pimento is a company surfaced as a portfolio company of partech and added to the API Evangelist
-  network as a stub for enrichment. Sector: AI/ML. This profile is a lead awaiting the enrichment pipeline.'
+description: 'Pimento is an AI ad-creative platform that helps marketing and advertising
+  teams generate, analyze, and benchmark advertising creatives at scale. Its published
+  product surface spans creative generation (Create), performance analysis (Analyze),
+  competitive benchmarking (Benchmark), reusable brand kits, a Meta Score for predicting
+  ad performance, multiformat output, and Meta Advantage+ support. Pimento is a venture-backed
+  company in Partech''s portfolio. As of this profile it publishes a marketing and
+  product website with signup, login, and book-a-demo flows, but no public developer
+  API, documentation, SDK, or MCP surface was found.'
 url: https://raw.githubusercontent.com/api-evangelist/pimento/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,10 +29,15 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
 - Ai/Ml
+- Advertising
+- Creative
+- Marketing
+- Generative AI
+- AdTech
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -22,5 +45,20 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/pimento-domain-security.yml
 - type: Website
   url: https://www.pimento.design/
+- type: SignUp
+  url: https://www.pimento.design/signup
+- type: Login
+  url: https://www.pimento.design/auth
+- type: PrivacyPolicy
+  url: https://www.pimento.design/privacy
+- type: TermsOfService
+  url: https://www.pimento.design/terms
+x-enrichment:
+  date: '2026-07-20'
+  status: minimal
+  artifacts_added: 1
+  pass: local-v1
