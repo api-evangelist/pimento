@@ -17,9 +17,12 @@ description: 'Pimento is an AI ad-creative platform that helps marketing and adv
   product surface spans creative generation (Create), performance analysis (Analyze),
   competitive benchmarking (Benchmark), reusable brand kits, a Meta Score for predicting
   ad performance, multiformat output, and Meta Advantage+ support. Pimento is a venture-backed
-  company in Partech''s portfolio. As of this profile it publishes a marketing and
-  product website with signup, login, and book-a-demo flows, but no public developer
-  API, documentation, SDK, or MCP surface was found.'
+  company in Partech''s portfolio. It ships an end-user SaaS application at app.pimento.design
+  backed by a private REST API and an Auth0 tenant, but that API is first-party only:
+  it is undocumented, returns 401 to anonymous callers, and is not offered to developers.
+  No developer portal, API reference, OpenAPI or other machine-readable specification,
+  SDK, package, webhook catalog, CLI, changelog, status page, public pricing page, or
+  MCP/A2A agent surface is published anywhere on a Pimento-controlled host.'
 url: https://raw.githubusercontent.com/api-evangelist/pimento/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -29,7 +32,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-08-12'
 tags:
 - Company
 - Ai/Ml
@@ -57,8 +60,42 @@ common:
   url: https://www.pimento.design/privacy
 - type: TermsOfService
   url: https://www.pimento.design/terms
+- type: Support
+  url: https://help.pimento.design/en/
+- type: LLMsTxt
+  url: llms/pimento-llms.txt
+- type: Plans
+  url: plans/pimento-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/pimento-rate-limits.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/pimentodesign
+- type: YouTube
+  url: https://www.youtube.com/@pimento.design
 x-enrichment:
-  date: '2026-07-20'
+  date: '2026-08-12'
   status: minimal
-  artifacts_added: 1
+  artifacts_added: 5
   pass: local-v1
+x-coverage:
+  state: none
+  reason: no-developer-program
+  detail: >-
+    Pimento's only API is the first-party backend behind its own web app —
+    https://app.pimento.design/api/* answers 401 {"detail":"Unable to authenticate"}
+    to anonymous callers and is guarded by the Auth0 tenant gopimento.eu.auth0.com
+    with audience https://api.gopimento.co (a name that does not resolve in public
+    DNS) — and Pimento publishes no developer portal, reference, spec, or SDK for it
+    anywhere; docs.pimento.design and api.pimento.design do not exist, and every
+    /openapi.json, /llms.txt and /.well-known/* path on www and app answers 200 with
+    the identical single-page-app shell rather than a document.
+  evidence:
+  - url: https://app.pimento.design/api/users/me
+    status: 401
+  - url: https://www.pimento.design/openapi.json
+    status: 200
+  - url: https://www.pimento.design/sitemap.xml
+    status: 200
+  - url: https://gopimento.eu.auth0.com/.well-known/openid-configuration
+    status: 200
+  checked: '2026-08-12'

@@ -1,0 +1,30 @@
+generated: '2026-08-12'
+method: searched
+source: https://www.pimento.design/
+plan_count: 0
+currency: null
+note: >-
+  Pimento publishes no pricing page. The marketing site's client-side router
+  (assets/index-DpMFA6is.js) declares no /pricing route at all, and
+  https://www.pimento.design/pricing answers 200 with the site's generic SPA shell
+  rather than a pricing document. The sitemap at https://www.pimento.design/sitemap.xml
+  lists 18 URLs and none of them is pricing. Plan selection happens inside the product:
+  https://app.pimento.design loads Stripe's hosted pricing-table script
+  (js.stripe.com/v3/pricing-table.js), so the tiers render only after signup/login.
+  The commercial entry points Pimento does publish are a signup flow, a login, and a
+  book-a-demo form. Consumption is credit-metered — the application links a help-centre
+  article "How additional credits work" — but that article now returns 404 and no credit
+  allowance, overage rate, or tier price is published anywhere a member of the public
+  can read. Recorded as an honest zero, not an omission.
+gate:
+  public_pricing_page: false
+  in_product_pricing_table: true
+  pricing_table_vendor: Stripe
+  contact_sales: https://www.pimento.design/book-demo
+  signup: https://www.pimento.design/signup
+plans: []
+x-evidence:
+- {url: 'https://www.pimento.design/pricing', http_status: 200, result: spa-shell-not-a-pricing-page, fetched: '2026-08-12'}
+- {url: 'https://www.pimento.design/sitemap.xml', http_status: 200, result: no-pricing-url-listed, fetched: '2026-08-12'}
+- {url: 'https://app.pimento.design/', http_status: 200, result: loads-stripe-pricing-table-behind-auth, fetched: '2026-08-12'}
+- {url: 'https://help.pimento.design/en/articles/11107656-how-additional-credits-work', http_status: 404, result: credits-article-removed, fetched: '2026-08-12'}

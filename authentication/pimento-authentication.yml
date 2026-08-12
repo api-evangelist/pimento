@@ -1,0 +1,86 @@
+generated: '2026-08-12'
+method: probed
+source: https://gopimento.eu.auth0.com/.well-known/openid-configuration
+x-pointer-suppressed:
+  type: Authentication
+  why: >-
+    No apis.yml `Authentication` pointer is emitted for this file, and a later round
+    should not add one without new evidence. The discovery document is real and
+    anonymous, but it is (a) served from auth0.com rather than a Pimento-controlled
+    domain and (b) auto-generated Auth0 tenant boilerplate for the product login — it
+    is not authentication documentation Pimento wrote for an API, because Pimento
+    publishes no API for developers. Emitting the pointer would credit the
+    `authentication_documented` / `auth_clarity` checks for a developer-facing auth
+    contract that does not exist. This artifact is a record of what was probed, not a
+    claim of published developer auth.
+summary:
+  public_api: false
+  types: [oauth2, openIdConnect]
+  oauth2_flows: [authorizationCode]
+  pkce: true
+  audience: https://api.gopimento.co
+  note: >-
+    Applies to Pimento's own first-party web application only. There is no public API
+    program, no developer key issuance, and no published authentication guide.
+identity_provider:
+  vendor: Auth0
+  tenant: gopimento.eu.auth0.com
+  region: eu
+  issuer: https://gopimento.eu.auth0.com/
+  discovered_from: >-
+    the app.pimento.design JavaScript bundle (assets/index-DeJG39iw.js), which
+    configures the Auth0 SPA SDK with domain gopimento.eu.auth0.com (prod),
+    redirectUri https://app.pimento.design/ and audience https://api.gopimento.co
+endpoints:
+  authorization: https://gopimento.eu.auth0.com/authorize
+  token: https://gopimento.eu.auth0.com/oauth/token
+  device_authorization: https://gopimento.eu.auth0.com/oauth/device/code
+  userinfo: https://gopimento.eu.auth0.com/userinfo
+  revocation: https://gopimento.eu.auth0.com/oauth/revoke
+  registration: https://gopimento.eu.auth0.com/oidc/register
+  jwks_uri: https://gopimento.eu.auth0.com/.well-known/jwks.json
+capabilities:
+  code_challenge_methods_supported: [S256, plain]
+  response_types_supported: [code, token, id_token, code token, code id_token, token id_token, code token id_token]
+  token_endpoint_auth_methods_supported: [client_secret_basic, client_secret_post, private_key_jwt, none]
+  scopes_supported:
+  - openid
+  - profile
+  - offline_access
+  - name
+  - given_name
+  - family_name
+  - nickname
+  - email
+  - email_verified
+  - picture
+  - created_at
+  - identities
+  - phone
+  - address
+  note: >-
+    These are Auth0's default OIDC scopes for the tenant. No API-specific
+    (audience-scoped) permissions are published, so no scopes/ artifact is written.
+protected_resource:
+  audience: https://api.gopimento.co
+  resolves_publicly: false
+  dns: NXDOMAIN as of 2026-08-12
+  note: >-
+    `https://api.gopimento.co` is the Auth0 API audience identifier, not a reachable
+    host — it does not resolve in public DNS. The API it identifies is served
+    same-origin at https://app.pimento.design/api/*.
+observed_challenge:
+  url: https://app.pimento.design/api/users/me
+  method: GET
+  http_status: 401
+  content_type: application/json
+  body: '{"detail":"Unable to authenticate"}'
+  note: >-
+    Confirms a live, credentialed API behind the application. Unrouted paths under
+    /api/ fall through to the SPA shell with a 200, so the 401 is the positive signal.
+raw:
+  file: ../well-known/pimento-auth0-openid-configuration.json
+x-evidence:
+- {url: 'https://gopimento.eu.auth0.com/.well-known/openid-configuration', http_status: 200, content_type: application/json, fetched: '2026-08-12'}
+- {url: 'https://gopimento.eu.auth0.com/.well-known/oauth-authorization-server', http_status: 200, content_type: application/json, fetched: '2026-08-12'}
+- {url: 'https://app.pimento.design/api/users/me', http_status: 401, content_type: application/json, fetched: '2026-08-12'}

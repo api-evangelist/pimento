@@ -1,0 +1,98 @@
+generated: '2026-08-12'
+method: probed
+source: live GET of /.well-known/* across every Pimento host discovered in this pass
+note: >-
+  Recorded absence. No host on a pimento.design domain serves any /.well-known
+  document of its own. www.pimento.design and app.pimento.design are client-rendered
+  single-page apps whose edge answers HTTP 200 with the identical SPA shell for every
+  path (13,764 bytes on www, 3,066 bytes on app) — those 200s are catch-alls, NOT
+  documents, and are recorded as misses here. The only two real documents found are
+  third-party: Intercom's own security.txt, served on Pimento's help subdomain but
+  canonicalised to app.intercom.com and pointing at Intercom's Bugcrowd program; and
+  an OIDC/OAuth discovery document on Pimento's Auth0 tenant, which lives on the
+  auth0.com domain rather than a Pimento-controlled one. Neither is a Pimento-authored
+  well-known surface, so NO `WellKnown` or `SecurityTxt` pointer is emitted in apis.yml.
+hosts:
+- host: https://www.pimento.design
+  kind: marketing-site
+  spa_catch_all: true
+  spa_shell_bytes: 13764
+  documents:
+  - {path: /.well-known/security.txt, status: 200, result: spa-shell, document: false}
+  - {path: /.well-known/openid-configuration, status: 200, result: spa-shell, document: false}
+  - {path: /.well-known/oauth-authorization-server, status: 200, result: spa-shell, document: false}
+  - {path: /.well-known/oauth-protected-resource, status: 200, result: spa-shell, document: false}
+  - {path: /.well-known/api-catalog, status: 200, result: spa-shell, document: false}
+  - {path: /.well-known/ai-plugin.json, status: 200, result: spa-shell, document: false}
+  - {path: /.well-known/agent-card.json, status: 200, result: spa-shell, document: false}
+  - {path: /.well-known/agent.json, status: 200, result: spa-shell, document: false}
+- host: https://app.pimento.design
+  kind: product-application
+  spa_catch_all: true
+  spa_shell_bytes: 3066
+  documents:
+  - {path: /.well-known/security.txt, status: 200, result: spa-shell, document: false}
+  - {path: /.well-known/openid-configuration, status: 200, result: spa-shell, document: false}
+  - {path: /.well-known/oauth-authorization-server, status: 200, result: spa-shell, document: false}
+  - {path: /.well-known/oauth-protected-resource, status: 200, result: spa-shell, document: false}
+  - {path: /.well-known/api-catalog, status: 200, result: spa-shell, document: false}
+  - {path: /.well-known/ai-plugin.json, status: 200, result: spa-shell, document: false}
+  - {path: /.well-known/agent-card.json, status: 200, result: spa-shell, document: false}
+  - {path: /.well-known/agent.json, status: 200, result: spa-shell, document: false}
+- host: https://help.pimento.design
+  kind: help-center
+  vendor: Intercom
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/plain
+    result: third-party-document
+    document: true
+    owner: Intercom
+    file: pimento-help-intercom-security.txt
+    note: >-
+      Canonical is https://app.intercom.com/.well-known/security.txt and Contact is
+      security@intercom.com / bugcrowd.com/intercom. This is Intercom's vulnerability
+      disclosure policy served on Pimento's CNAMEd help subdomain, not Pimento's own.
+      It does not earn Pimento a SecurityTxt or Security pointer.
+  - {path: /.well-known/openid-configuration, status: 404, document: false}
+  - {path: /.well-known/oauth-authorization-server, status: 404, document: false}
+  - {path: /.well-known/oauth-protected-resource, status: 404, document: false}
+  - {path: /.well-known/api-catalog, status: 404, document: false}
+  - {path: /.well-known/ai-plugin.json, status: 404, document: false}
+  - {path: /.well-known/agent-card.json, status: 404, document: false}
+  - {path: /.well-known/agent.json, status: 404, document: false}
+- host: https://gopimento.eu.auth0.com
+  kind: identity-provider-tenant
+  vendor: Auth0
+  on_provider_domain: false
+  note: >-
+    Pimento's production Auth0 tenant, named `gopimento` and referenced from the
+    app.pimento.design JavaScript bundle. The discovery documents below are real and
+    anonymous, but they are served from auth0.com, not from a Pimento-controlled
+    domain, so they are recorded here as evidence without an apis.yml WellKnown pointer.
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: application/json
+    result: real-document
+    document: true
+    file: pimento-auth0-openid-configuration.json
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json
+    result: real-document
+    document: true
+    note: byte-identical to the openid-configuration response (Auth0 serves one document at both paths)
+  - {path: /.well-known/security.txt, status: 404, document: false}
+  - {path: /.well-known/oauth-protected-resource, status: 404, document: false}
+  - {path: /.well-known/api-catalog, status: 404, document: false}
+  - {path: /.well-known/ai-plugin.json, status: 404, document: false}
+  - {path: /.well-known/agent-card.json, status: 404, document: false}
+  - {path: /.well-known/agent.json, status: 404, document: false}
+agent_card:
+  found: false
+  note: >-
+    No A2A Agent Card on any host. The 200s on www/app are the SPA catch-all
+    (HTML body, not JSON) and are rejected per the pipeline's dominant-false-positive
+    rule; help and the Auth0 tenant return honest 404s. Nothing written to a2a/.

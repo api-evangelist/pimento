@@ -1,0 +1,25 @@
+generated: '2026-08-12'
+method: searched
+source: https://help.pimento.design/en/
+limit_count: 0
+note: >-
+  No published rate limits. Pimento has no developer documentation of any kind, so
+  there is no page on which a limit could be documented: the help centre
+  (help.pimento.design, Intercom-hosted) exposes exactly one article — "Contact us!" —
+  and its llms.txt confirms that is the whole public index. Pimento's own API is the
+  private application backend at https://app.pimento.design/api/*, which answers 401
+  to anonymous callers and therefore emits no observable RateLimit-* / X-RateLimit-* /
+  Retry-After headers to record. The product is metered by CREDITS rather than by
+  request rate — the application links a "How additional credits work" article — but
+  that article returns 404 and no allowance, reset window, or overage figure is
+  published. An honest zero: nothing was found because nothing is published.
+headers_observed: []
+metering:
+  model: credits
+  documented_publicly: false
+  note: credit consumption is described only inside the authenticated product
+limits: []
+x-evidence:
+- {url: 'https://help.pimento.design/llms.txt', http_status: 200, result: one-article-index-no-limits, fetched: '2026-08-12'}
+- {url: 'https://help.pimento.design/en/articles/11107656-how-additional-credits-work', http_status: 404, result: credits-article-removed, fetched: '2026-08-12'}
+- {url: 'https://app.pimento.design/api/users/me', http_status: 401, result: no-rate-limit-headers-on-anonymous-response, fetched: '2026-08-12'}

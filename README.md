@@ -42,6 +42,30 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Pimento is a company surfaced as a portfolio company of partech and added to the API Evangelist network as a stub for enrichment. Sector: AI/ML. This profile is a lead awaiting the enrichment pipeline.
+Pimento is an AI ad-creative platform (Create, Analyze, Benchmark, Brand Kit, Meta Score,
+multiformat, Meta Advantage+), surfaced as a portfolio company of Partech. Sector: AI/ML.
+
+## Why this profile is thin
+
+Pimento has **no developer program**. A contract-discovery pass on 2026-08-12 probed every
+Pimento host and found:
+
+- `www.pimento.design` and `app.pimento.design` are client-rendered single-page apps whose edge
+  answers HTTP **200 with the identical shell** for every path — including `/openapi.json`,
+  `/llms.txt` and every `/.well-known/*`. Those 200s are catch-alls, not documents.
+- `api.pimento.design`, `docs.pimento.design`, `developer(s).pimento.design`, `status.pimento.design`
+  and `blog.pimento.design` do **not resolve**.
+- A real, private API does exist: `https://app.pimento.design/api/*` answers
+  `401 {"detail":"Unable to authenticate"}`, guarded by Pimento's Auth0 tenant
+  `gopimento.eu.auth0.com` with the audience `https://api.gopimento.co` (which itself does not
+  resolve in public DNS). It is the web app's own backend — undocumented, unreferenced, and not
+  offered to third parties.
+- No OpenAPI, AsyncAPI, GraphQL SDL, Postman collection, MCP server, A2A agent card, SDK,
+  package, CLI, changelog, status page or public pricing page was found anywhere.
+
+What **is** published and captured here: an Intercom help centre with a real (if near-empty)
+`llms.txt`, the Auth0 OIDC discovery document, TLS/DNS posture, and an honest zero for plans and
+rate limits. The Intercom `security.txt` served at `help.pimento.design` is **Intercom's own**
+(canonical `app.intercom.com`) and is deliberately not credited to Pimento.
 
 Backed by: partech — https://www.pimento.design/
