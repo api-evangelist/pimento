@@ -64,30 +64,97 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Pimento is an AI ad-creative platform (Create, Analyze, Benchmark, Brand Kit, Meta Score,
-multiformat, Meta Advantage+), surfaced as a portfolio company of Partech. Sector: AI/ML.
+Pimento is an AI ad-creative platform that helps marketing and advertising teams generate, analyze, and benchmark advertising creatives at scale. Its published product surface spans creative generation (Create), performance analysis (Analyze), competitive benchmarking (Benchmark), reusable brand kits, a Meta Score for predicting ad performance, multiformat output, and Meta Advantage+ support. Pimento is a venture-backed company in Partech's portfolio. It ships an end-user SaaS application at app.pimento.design backed by a private REST API and an Auth0 tenant, but that API is first-party only: it is undocumented, returns 401 to anonymous callers, and is not offered to developers. No developer portal, API reference, OpenAPI or other machine-readable specification, SDK, package, webhook catalog, CLI, changelog, status page, public pricing page, or MCP/A2A agent surface is published anywhere on a Pimento-controlled host.
 
-## Why this profile is thin
+**Areas:** Company · Artificial Intelligence · Advertising · Creative · Marketing · Generative AI · AdTech
 
-Pimento has **no developer program**. A contract-discovery pass on 2026-08-12 probed every
-Pimento host and found:
+## Pimento on APIs.io
 
-- `www.pimento.design` and `app.pimento.design` are client-rendered single-page apps whose edge
-  answers HTTP **200 with the identical shell** for every path — including `/openapi.json`,
-  `/llms.txt` and every `/.well-known/*`. Those 200s are catch-alls, not documents.
-- `api.pimento.design`, `docs.pimento.design`, `developer(s).pimento.design`, `status.pimento.design`
-  and `blog.pimento.design` do **not resolve**.
-- A real, private API does exist: `https://app.pimento.design/api/*` answers
-  `401 {"detail":"Unable to authenticate"}`, guarded by Pimento's Auth0 tenant
-  `gopimento.eu.auth0.com` with the audience `https://api.gopimento.co` (which itself does not
-  resolve in public DNS). It is the web app's own backend — undocumented, unreferenced, and not
-  offered to third parties.
-- No OpenAPI, AsyncAPI, GraphQL SDL, Postman collection, MCP server, A2A agent card, SDK,
-  package, CLI, changelog, status page or public pricing page was found anywhere.
+Everything profiled for Pimento is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/pimento/](https://apis.io/providers/pimento/)** — or go straight to one of the APIs or properties below.
 
-What **is** published and captured here: an Intercom help centre with a real (if near-empty)
-`llms.txt`, the Auth0 OIDC discovery document, TLS/DNS posture, and an honest zero for plans and
-rate limits. The Intercom `security.txt` served at `help.pimento.design` is **Intercom's own**
-(canonical `app.intercom.com`) and is deliberately not credited to Pimento.
+### Published properties
 
-Backed by: partech — https://www.pimento.design/
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Pimento Authentication](https://apis.io/security/pimento/pimento-authentication/)
+- [Pimento Domain Security](https://apis.io/security/pimento/pimento-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Pimento Plans Pricing](https://apis.io/plans/pimento/pimento-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Pimento Rate Limits](https://apis.io/rate-limits/pimento/pimento-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.pimento.design/)
+- [Sign up](https://www.pimento.design/signup)
+- [Support](https://help.pimento.design/en/)
+- [Blog](https://www.pimento.design/blog/)
+- [Terms of service](https://www.pimento.design/terms)
+- [Privacy policy](https://www.pimento.design/privacy)
+
+## API Evangelist rating
+
+**Kin Score 7.2** — minimal · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 55.4 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 7.1 |
+| Access clarity | 6.6 |
+
+**Agent readiness 17.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.9** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/pimento/](https://apis.io/providers/pimento/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Pimento: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/pimento/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
